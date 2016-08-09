@@ -42,7 +42,7 @@ To get all events:
 
 To delete event:
 
-    $client->deleteEvent($fomoEvent1->id);
+    $client->deleteEvent("<event ID>");
 
 To update event:
 
