@@ -50,4 +50,4 @@ To update event:
     $fomoEvent->first_name = "John";
     $fomoEvent = $client->updateEvent($fomoEvent);
 
-If you have any questions we are available via e-mail support: [hello@usefomo.com](hello@usefomo.com)
+If you have any questions we are available via e-mail support: [hello@usefomo.com](mailto:hello@usefomo.com)
