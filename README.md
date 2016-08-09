@@ -13,9 +13,9 @@ Requirements
 User Installation
 -----------------
 
-Download src/fomo.php and include file to your own PHP project.
+Download [src/fomo.php](src/fomo.php) and include file to your own PHP project.
 
-Check out our examples in example/fomo-example.php, quick usage examples:
+Check out our examples in [example/fomo-example.php](example/fomo-example.php), quick usage examples:
 
 Initialize Fomo client via:
 
