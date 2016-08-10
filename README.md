@@ -1,7 +1,7 @@
-Fomo-PHP-SDK
+Fomo PHP SDK
 ================
 
-*Fomo-PHP-SDK* is official SDK wrapper around [Fomo API service](https://www.usefomo.com)
+*Fomo PHP SDK* is the official SDK wrapper for the [Fomo API service](https://www.usefomo.com)
 
 API docs: [http://docs.usefomo.com/reference](http://docs.usefomo.com/reference)
 
@@ -13,7 +13,7 @@ Requirements
 User Installation
 -----------------
 
-Download [src/fomo.php](src/fomo.php) and include file to your own PHP project.
+Download [src/fomo.php](src/fomo.php) and include the file in your PHP project.
 
 Check out our examples in [example/fomo-example.php](example/fomo-example.php), quick usage examples:
 
@@ -21,7 +21,7 @@ Initialize Fomo client via:
 
     $client = new FomoClient($authToken); // auth token can be found Fomo application admin dashboard (App -> API Access)
 
-To create new event:
+To create a new event:
 
     $event = new FomoEventBasic();
     $event->event_type_id = "4"; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
@@ -32,22 +32,22 @@ To create new event:
     // for additional parameters check code documentation
     $fomoEvent = $client->createEvent($event);
 
-To get event:
+To get an event:
 
     $fomoEvent = $client->getEvent("<event ID>");
 
 To get all events:
 
-    $fomoEvent = $client->getEvents();
+    $fomoEvents = $client->getEvents();
 
-To delete event:
+To delete an event:
 
     $client->deleteEvent("<event ID>");
 
-To update event:
+To update an event:
 
     $fomoEvent = $client->getEvent("<event ID>");
     $fomoEvent->first_name = "John";
     $fomoEvent = $client->updateEvent($fomoEvent);
 
-If you have any questions we are available via e-mail support: [hello@usefomo.com](mailto:hello@usefomo.com)
+If you have questions, email us at [hello@usefomo.com](mailto:hello@usefomo.com).
