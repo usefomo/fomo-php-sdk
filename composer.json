@@ -1,0 +1,38 @@
+{
+  "name": "usefomo/fomo-php-sdk",
+  "description": "Fomo PHP SDK is the official SDK wrapper for the Fomo API service",
+  "version": "1.0.0",
+  "keywords": [
+    "fomo",
+    "notifications",
+    "wrapper",
+    "api"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/usefomo/fomo-php-sdk",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "fomo",
+      "email": "hello@usefomo.com",
+      "homepage": "https://www.usefomo.com",
+      "role": "developer"
+    }
+  ],
+  "support": {
+    "email": "hello@usefomo.com",
+    "source": "https://github.com/usefomo/fomo-php-sdk",
+    "docs": "https://github.com/usefomo/fomo-php-sdk/blob/master/README.md",
+    "issues": "https://github.com/usefomo/fomo-php-sdk/issues"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fomo\\": "src/Fomo"
+    },
+    "classmap": ["src/Fomo/FomoClient.php"]
+  }
+}

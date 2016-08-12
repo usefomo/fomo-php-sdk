@@ -5,49 +5,74 @@ Fomo PHP SDK
 
 API docs: [http://docs.usefomo.com/reference](http://docs.usefomo.com/reference)
 
-Requirements
-------------
+## Requirements
 
 - PHP Version 5.3.0+
 
-User Installation
------------------
+## Installation
 
-Download [src/fomo.php](src/fomo.php) and include the file in your PHP project.
+Install the latest version with
+
+```bash
+$ composer require usefomo/fomo-php-sdk
+```
+
+## Manual User Installation
+
+Download [src/Fomo/FomoClient.php](src/Fomo/FomoClient.php) and include the file in your PHP project.
 
 Check out our examples in [example/fomo-example.php](example/fomo-example.php), quick usage examples:
 
+## Basic Usage
+
 Initialize Fomo client via:
 
-    $client = new FomoClient($authToken); // auth token can be found Fomo application admin dashboard (App -> API Access)
+```php
+<?php
+use Fomo\FomoClient;
+$client = new FomoClient($authToken); // auth token can be found Fomo application admin dashboard (App -> API Access)
+```
 
 To create a new event:
 
-    $event = new FomoEventBasic();
-    $event->event_type_id = "4"; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
-    $event->title = "Test event";
-    $event->first_name = "Dean";
-    $event->city = "San Francisco";
-    $event->url = "https://www.usefomo.com";
-    // for additional parameters check code documentation
-    $fomoEvent = $client->createEvent($event);
+```php
+use Fomo\FomoEventBasic;
+$event = new FomoEventBasic();
+$event->event_type_id = "4"; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
+$event->title = "Test event";
+$event->first_name = "Dean";
+$event->city = "San Francisco";
+$event->url = "https://www.usefomo.com";
+// for additional parameters check code documentation
+$fomoEvent = $client->createEvent($event);
+```
 
 To get an event:
 
-    $fomoEvent = $client->getEvent("<event ID>");
+```php
+$fomoEvent = $client->getEvent("<event ID>");
+```
 
 To get all events:
 
-    $fomoEvents = $client->getEvents();
+```php
+$fomoEvents = $client->getEvents();
+```
 
 To delete an event:
 
-    $client->deleteEvent("<event ID>");
+```php
+$client->deleteEvent("<event ID>");
+```
 
 To update an event:
 
-    $fomoEvent = $client->getEvent("<event ID>");
-    $fomoEvent->first_name = "John";
-    $fomoEvent = $client->updateEvent($fomoEvent);
+```php
+$fomoEvent = $client->getEvent("<event ID>");
+$fomoEvent->first_name = "John";
+$fomoEvent = $client->updateEvent($fomoEvent);
+```
+
+## Support
 
 If you have questions, email us at [hello@usefomo.com](mailto:hello@usefomo.com).

@@ -1,7 +1,9 @@
-<?php
+<?
 /**
  * Copyright (c) 2016. Fomo. https://www.usefomo.com
  **/
+
+namespace Fomo;
 
 /**
  * Fomo Client is wrapper around official Fomo API

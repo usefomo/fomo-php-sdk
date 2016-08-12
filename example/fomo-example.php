@@ -1,5 +1,8 @@
 <?php
-include_once '../src/fomo.php';
+use Fomo\FomoClient;
+use Fomo\FomoEventBasic;
+
+include_once '../src/Fomo/FomoClient.php';
 $token = "<token>";
 $client = new FomoClient($token);
 // $client->setProxy('tcp://127.0.0.1:8888');
