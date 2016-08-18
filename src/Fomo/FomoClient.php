@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Copyright (c) 2016. Fomo. https://www.usefomo.com
  **/
