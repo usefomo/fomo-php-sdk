@@ -3,17 +3,19 @@ use Fomo\FomoClient;
 use Fomo\FomoEventBasic;
 
 include_once '../src/Fomo/FomoClient.php';
-$token = "<token>";
+include_once '../src/Fomo/FomoEventBasic.php';
+$token = 'MzBiGa33iD5ACNcQHPHX9A';
 $client = new FomoClient($token);
 // $client->setProxy('tcp://127.0.0.1:8888');
 
 // create event
 $event = new FomoEventBasic();
-$event->event_type_id = "4";
-$event->title = "Test event";
-$event->first_name = "Dean";
-$event->city = "San Francisco";
-$event->url = "https://www.usefomo.com";
+$event->event_type_id = '183';
+$event->title = 'Test event';
+$event->first_name = 'Dean';
+$event->city = 'San Francisco';
+$event->url = 'https://www.usefomo.com';
+$event->addCustomEventField('variable_name', 'value');
 $fomoEvent1 = $client->createEvent($event);
 print_r($fomoEvent1);
 $fomoEvent2 = $client->createEvent($event);
@@ -25,15 +27,15 @@ print_r($fomoEventGet);
 
 // get events
 $events = $client->getEvents();
-echo "Events count: ", count($events), "\n";
+echo 'Events count: ', count($events), '\n';
 print_r($events);
 
 // update event
-$fomoEventGet->first_name = "John";
+$fomoEventGet->first_name = 'John';
 $fomoEventUpdated = $client->updateEvent($fomoEventGet);
 print_r($fomoEventUpdated);
 if ($fomoEventUpdated->first_name != $fomoEventGet->first_name) {
-    die("Update function does not work.");
+    die('Update function does not work.');
 }
 
 // delete event

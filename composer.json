@@ -1,12 +1,13 @@
 {
   "name": "usefomo/fomo-php-sdk",
   "description": "Fomo PHP SDK is the official SDK wrapper for the Fomo API service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "fomo",
     "notifications",
     "wrapper",
-    "api"
+    "api",
+    "social proof"
   ],
   "type": "library",
   "homepage": "https://www.usefomo.com",
@@ -33,6 +34,12 @@
     "psr-4": {
       "Fomo\\": "src/Fomo"
     },
-    "classmap": ["src/Fomo/FomoClient.php"]
+    "classmap": [
+      "src/Fomo/FomoClient.php",
+      "src/Fomo/FomoDeleteMessageResponse.php",
+      "src/Fomo/FomoEvent.php",
+      "src/Fomo/FomoEventBasic.php",
+      "src/Fomo/FomoEventCustomAttribute.php"
+    ]
   }
 }

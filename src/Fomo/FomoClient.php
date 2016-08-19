@@ -5,6 +5,9 @@
 
 namespace Fomo;
 
+include_once 'FomoEvent.php';
+include_once 'FomoDeleteMessageResponse.php';
+
 /**
  * Fomo Client is wrapper around official Fomo API
  *
@@ -61,7 +64,7 @@ class FomoClient
      */
     public function getEvent($id)
     {
-        return $this->cast('FomoEvent', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'GET'));
+        return $this->cast('\Fomo\FomoEvent', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'GET'));
     }
 
     /**
@@ -74,7 +77,7 @@ class FomoClient
         $list = array();
         if ($objects != null && is_array($objects)) {
             foreach ($objects as $object) {
-                $list[] = $this->cast('FomoEvent', $object);
+                $list[] = $this->cast('\Fomo\FomoEvent', $object);
             }
         }
         return $list;
@@ -87,7 +90,7 @@ class FomoClient
      */
     public function createEvent(FomoEventBasic $event)
     {
-        return $this->cast('FomoEvent', $this->makeRequest('/api/v1/applications/me/events', 'POST', $event));
+        return $this->cast('\Fomo\FomoEvent', $this->makeRequest('/api/v1/applications/me/events', 'POST', array('event' => $event)));
     }
 
     /**
@@ -97,7 +100,7 @@ class FomoClient
      */
     public function updateEvent(FomoEvent $event)
     {
-        return $this->cast('FomoEvent', $this->makeRequest('/api/v1/applications/me/events/' . $event->id, 'PATCH', $event));
+        return $this->cast('\Fomo\FomoEvent', $this->makeRequest('/api/v1/applications/me/events/' . $event->id, 'PATCH', array('event' => $event)));
     }
 
     /**
@@ -107,7 +110,7 @@ class FomoClient
      */
     public function deleteEvent($id)
     {
-        return $this->cast('FomoDeleteMessageResponse', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'DELETE'));
+        return $this->cast('\Fomo\FomoDeleteMessageResponse', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'DELETE'));
     }
 
     /**
@@ -160,8 +163,8 @@ class FomoClient
         if (is_string($destination)) {
             $destination = new $destination();
         }
-        $sourceReflection = new ReflectionObject($sourceObject);
-        $destinationReflection = new ReflectionObject($destination);
+        $sourceReflection = new \ReflectionObject($sourceObject);
+        $destinationReflection = new \ReflectionObject($destination);
         $sourceProperties = $sourceReflection->getProperties();
         foreach ($sourceProperties as $sourceProperty) {
             $sourceProperty->setAccessible(true);
@@ -179,137 +182,3 @@ class FomoClient
     }
 }
 
-/**
- * Class FomoEventBasic
- */
-class FomoEventBasic
-{
-    /**
-     * @var string Event type unique ID (required)
-     */
-    public $event_type_id = '';
-
-    /**
-     * @var string Url to redirect on the event click. Size range: 0..255 (required)
-     */
-    public $url = '';
-
-    /**
-     * @var string First name of the person on the event. Size range: 0..255
-     */
-    public $first_name = '';
-
-    /**
-     * @var string City where the event happened. Size range: 0..255
-     */
-    public $city = '';
-
-    /**
-     * @var string Province where the event happened. Size range: 0..255
-     */
-    public $province = '';
-
-    /**
-     * @var string Country where the event happened ISO-2 standard. Size range: 0..255
-     */
-    public $country = '';
-
-    /**
-     * @var string Title of the event. Size range: 0..255
-     */
-    public $title = '';
-
-    /**
-     * @var string Url of the image to be displayed. Size range: 0..255
-     */
-    public $image_url = '';
-
-    /**
-     * @var FomoEventCustomAttribute[] Array to create custom event fields
-     */
-    public $custom_event_fields_attributes = array();
-
-    /**
-     * Add custom attribute value
-     * @param $key string Custom attribute key
-     * @param $value string Custom attribute value
-     */
-    public function addCustomEventField($key, $value)
-    {
-        $this->custom_event_fields_attributes[] = new FomoEventCustomAttribute($key, $value);
-    }
-}
-
-/**
- * Class FomoEvent
- */
-class FomoEvent extends FomoEventBasic
-{
-    /**
-     * @var string Id of the event type (needed only for the update)
-     */
-    public $id;
-
-    /**
-     * @var string Created timestamp (received info)
-     */
-    public $created_at;
-
-    /**
-     * @var string Updated timestamp (received info)
-     */
-    public $updated_at;
-
-    /**
-     * @var string Message template (received info)
-     */
-    public $message;
-
-    /**
-     * @var string Full link (received info)
-     */
-    public $link;
-}
-
-/**
- * Class FomoEventCustomAttribute
- */
-class FomoEventCustomAttribute
-{
-    /**
-     * @var int Attribute ID (needed only for the update)
-     */
-    public $id;
-
-    /**
-     * @var string Custom attribute key
-     */
-    public $key = '';
-
-    /**
-     * @var string Custom attribute value
-     */
-    public $value = '';
-
-    /**
-     * FomoEventCustomAttribute constructor.
-     * @param $key string Custom attribute key
-     * @param $value string Custom attribute value
-     */
-    public function __construct($key, $value)
-    {
-        $this->key = $key;
-        $this->value = $value;
-    }
-}
-
-/**
- * Class FomoDeleteMessageResponse
- */
-class FomoDeleteMessageResponse
-{
-    /**
-     * @var string Message
-     */
-    public $message;
-}

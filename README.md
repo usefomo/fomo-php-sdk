@@ -44,6 +44,10 @@ $event->first_name = "Dean";
 $event->city = "San Francisco";
 $event->url = "https://www.usefomo.com";
 // for additional parameters check code documentation
+
+// Add event custom attribute value
+$event->addCustomEventField('variable_name', 'value');
+
 $fomoEvent = $client->createEvent($event);
 ```
 
