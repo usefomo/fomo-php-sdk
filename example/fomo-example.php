@@ -4,7 +4,7 @@ use Fomo\FomoEventBasic;
 
 include_once '../src/Fomo/FomoClient.php';
 include_once '../src/Fomo/FomoEventBasic.php';
-$token = 'MzBiGa33iD5ACNcQHPHX9A';
+$token = '<token>';
 $client = new FomoClient($token);
 // $client->setProxy('tcp://127.0.0.1:8888');
 
