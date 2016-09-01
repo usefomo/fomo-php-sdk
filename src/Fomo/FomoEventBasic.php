@@ -9,9 +9,14 @@ include_once 'FomoEventCustomAttribute.php';
 class FomoEventBasic
 {
     /**
-     * @var string Event type unique ID (required)
+     * @var string Event type unique ID (optional|required if event_type_tag = '')
      */
     public $event_type_id = '';
+
+    /**
+     * @var string Event type tag (optional|required if event_type_id = '')
+     */
+    public $event_type_tag = '';
 
     /**
      * @var string Url to redirect on the event click. Size range: 0..255 (required)

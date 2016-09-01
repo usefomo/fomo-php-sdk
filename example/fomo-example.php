@@ -10,7 +10,7 @@ $client = new FomoClient($token);
 
 // create event
 $event = new FomoEventBasic();
-$event->event_type_id = '183';
+$event->event_type_tag = 'new-order'; // Event type tag is found on Fomo dashboard (Templates -> Template name)
 $event->title = 'Test event';
 $event->first_name = 'Dean';
 $event->city = 'San Francisco';
@@ -20,6 +20,12 @@ $fomoEvent1 = $client->createEvent($event);
 print_r($fomoEvent1);
 $fomoEvent2 = $client->createEvent($event);
 print_r($fomoEvent2);
+
+// create event with event type id
+$event->event_type_tag = '';
+$event->event_type_id = '183'; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
+$fomoEvent3 = $client->createEvent($event);
+print_r($fomoEvent3);
 
 // get event
 $fomoEventGet = $client->getEvent($fomoEvent1->id);
@@ -41,3 +47,4 @@ if ($fomoEventUpdated->first_name != $fomoEventGet->first_name) {
 // delete event
 print_r($client->deleteEvent($fomoEvent1->id));
 print_r($client->deleteEvent($fomoEvent2->id));
+print_r($client->deleteEvent($fomoEvent3->id));

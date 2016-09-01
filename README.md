@@ -33,7 +33,25 @@ use Fomo\FomoClient;
 $client = new FomoClient($authToken); // auth token can be found Fomo application admin dashboard (App -> API Access)
 ```
 
-To create a new event:
+To create a new event with template name:
+
+```php
+use Fomo\FomoEventBasic;
+$event = new FomoEventBasic();
+$event->event_type_tag = "new-order"; // Event type tag is found on Fomo dashboard (Templates -> Template name)
+$event->title = "Test event";
+$event->first_name = "Dean";
+$event->city = "San Francisco";
+$event->url = "https://www.usefomo.com";
+// for additional parameters check code documentation
+
+// Add event custom attribute value
+$event->addCustomEventField('variable_name', 'value');
+
+$fomoEvent = $client->createEvent($event);
+```
+
+or with template ID:
 
 ```php
 use Fomo\FomoEventBasic;
