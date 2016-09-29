@@ -3,6 +3,7 @@ namespace Fomo;
 
 /**
  * Class FomoEventCustomAttribute
+ * @package Fomo
  */
 class FomoEventCustomAttribute
 {

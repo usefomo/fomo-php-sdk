@@ -75,10 +75,25 @@ To get an event:
 $fomoEvent = $client->getEvent("<event ID>");
 ```
 
-To get all events:
+To get events:
 
 ```php
-$fomoEvents = $client->getEvents();
+$fomoEvents = $client->getEvents(30 /* page size */, 1 /* page */);
+```
+
+To get events with meta data:
+
+```php
+$fomoEventsWithMeta = $client->getEventsWithMeta(30 /* page size */, 1 /* page */);
+
+/* Events */
+print_r($fomoEventsWithMeta->events);
+
+/* Meta data */
+echo 'Current page: ', $fomoEventsWithMeta->meta->page, "\n";
+echo 'Total pages: ', $fomoEventsWithMeta->meta->total_pages, "\n";
+echo 'Page size: ', $fomoEventsWithMeta->meta->per_page, "\n";
+echo 'Total count: ', $fomoEventsWithMeta->meta->total_count, "\n";
 ```
 
 To delete an event:

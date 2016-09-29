@@ -5,6 +5,7 @@ include_once 'FomoEventBasic.php';
 
 /**
  * Class FomoEvent
+ * @package Fomo
  */
 class FomoEvent extends FomoEventBasic
 {

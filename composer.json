@@ -1,7 +1,7 @@
 {
   "name": "usefomo/fomo-php-sdk",
   "description": "Fomo PHP SDK is the official SDK wrapper for the Fomo API service",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": [
     "fomo",
     "notifications",
@@ -39,7 +39,9 @@
       "src/Fomo/FomoDeleteMessageResponse.php",
       "src/Fomo/FomoEvent.php",
       "src/Fomo/FomoEventBasic.php",
-      "src/Fomo/FomoEventCustomAttribute.php"
+      "src/Fomo/FomoEventCustomAttribute.php",
+      "src/Fomo/FomoEventsMeta.php",
+      "src/Fomo/FomoEventsWithMeta.php"
     ]
   }
 }

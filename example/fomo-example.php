@@ -1,12 +1,21 @@
 <?php
 use Fomo\FomoClient;
 use Fomo\FomoEventBasic;
+use Fomo\FomoEventsWithMeta;
 
 include_once '../src/Fomo/FomoClient.php';
 include_once '../src/Fomo/FomoEventBasic.php';
+include_once '../src/Fomo/FomoEventsWithMeta.php';
 $token = '<token>';
 $client = new FomoClient($token);
 // $client->setProxy('tcp://127.0.0.1:8888');
+
+$eventsWithMeta = $client->getEventsWithMeta(100, 1);
+echo 'Current page: ', $eventsWithMeta->meta->page, "\n";
+echo 'Total pages: ', $eventsWithMeta->meta->total_pages, "\n";
+echo 'Page size: ', $eventsWithMeta->meta->per_page, "\n";
+echo 'Total count: ', $eventsWithMeta->meta->total_count, "\n";
+print_r($eventsWithMeta);
 
 // create event
 $event = new FomoEventBasic();

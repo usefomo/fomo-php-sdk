@@ -3,6 +3,7 @@ namespace Fomo;
 
 /**
  * Class FomoDeleteMessageResponse
+ * @package Fomo
  */
 class FomoDeleteMessageResponse
 {

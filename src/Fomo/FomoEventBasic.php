@@ -5,6 +5,7 @@ include_once 'FomoEventCustomAttribute.php';
 
 /**
  * Class FomoEventBasic
+ * @package Fomo
  */
 class FomoEventBasic
 {

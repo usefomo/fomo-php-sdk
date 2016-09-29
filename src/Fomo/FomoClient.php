@@ -12,8 +12,9 @@ include_once 'FomoDeleteMessageResponse.php';
  * Fomo Client is wrapper around official Fomo API
  *
  * @link http://docs.usefomo.com/reference
- * @version 1.0
+ * @version 1.0.3
  * @author Fomo <https://www.usefomo.com>
+ * @package Fomo
  *
  * Requires PHP version >= 5.3.0
  */
@@ -24,6 +25,11 @@ if (version_compare(phpversion(), '5.3.0', '<')) {
 
 class FomoClient
 {
+    /**
+     * @var string SDK version
+     */
+    private $sdkVersion = '1.0.3';
+
     /**
      * @var string Fomo Auth token
      */
@@ -69,11 +75,13 @@ class FomoClient
 
     /**
      * Get events
+     * @param int $size Page size, default = 30
+     * @param int $page Page number, default = 1
      * @return FomoEvent[] Fomo event
      */
-    public function getEvents()
+    public function getEvents($size = 30, $page = 1)
     {
-        $objects = $this->makeRequest('/api/v1/applications/me/events', 'GET');
+        $objects = $this->makeRequest('/api/v1/applications/me/events?per=' . $size . '&page=' . $page, 'GET');
         $list = array();
         if ($objects != null && is_array($objects)) {
             foreach ($objects as $object) {
@@ -81,6 +89,27 @@ class FomoClient
             }
         }
         return $list;
+    }
+
+    /**
+     * Get events with meta data
+     * @param int $size Page size, default = 30
+     * @param int $page Page number, default = 1
+     * @return FomoEventsWithMeta Fomo events with meta data
+     */
+    public function getEventsWithMeta($size = 30, $page = 1)
+    {
+        $data = $this->makeRequest('/api/v1/applications/me/events?per=' . $size . '&page=' . $page . '&show_meta=true', 'GET');
+        $object = $this->cast('\Fomo\FomoEventsWithMeta', $data);
+        if (isset($object->events)) {
+            for ($i = 0; $i < count($object->events); $i++) {
+                $object->events[$i] = $this->cast('\Fomo\FomoEvent', $object->events[$i]);
+            }
+        }
+        if (isset($object->meta)) {
+            $object->meta = $this->cast('\Fomo\FomoEventsMeta', $object->meta);
+        }
+        return $object;
     }
 
     /**
@@ -130,12 +159,17 @@ class FomoClient
             if ($data != null) {
                 $headers[] = 'Content-Type: application/json';
             }
+            $headers[] = 'User-Agent: Fomo/PHP/' . $this->sdkVersion;
             $headers[] = 'Authorization: Token ' . $this->authToken;
         }
         $opts = array(
             'http' => array(
                 'method' => $method,
                 'header' => $headers
+            ),
+            "ssl" => array(
+                "verify_peer" => false,
+                "verify_peer_name" => false,
             )
         );
         if ($data != null) {
@@ -181,4 +215,3 @@ class FomoClient
         return $destination;
     }
 }
-
