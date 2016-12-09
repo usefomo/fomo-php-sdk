@@ -144,11 +144,14 @@ class FomoClient
 
     /**
      * Make authorized request to Fomo API
+     *
      * @param $path string API path
      * @param $method string HTTP Method
      * @param mixed $data Object to send, object is JSON serialized before it is sent
      * @param array $headers List of headers to be added to request
+     *
      * @return mixed Data received from API response
+     * @throws \RuntimeException
      */
     private function makeRequest($path, $method, $data = null, $headers = array())
     {
@@ -179,7 +182,13 @@ class FomoClient
             $opts['http']['proxy'] = $this->proxy;
         }
         $context = stream_context_create($opts);
-        $response = json_decode(file_get_contents($this->endpoint . $path, false, $context));
+        $httpResponse = file_get_contents($this->endpoint . $path, false, $context);
+
+        if ($httpResponse === false) {
+            throw new \RuntimeException("API Error");
+        }
+
+        $response = json_decode($httpResponse);
         // var_dump($http_response_header);
         // var_dump($response);
         return $response;
