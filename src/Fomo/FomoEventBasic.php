@@ -30,6 +30,11 @@ class FomoEventBasic
     public $first_name = '';
 
     /**
+     * @var string Email address of the person on the event. Size range: 0..255
+     */
+    public $email_address = '';
+
+    /**
      * @var string City where the event happened. Size range: 0..255
      */
     public $city = '';
