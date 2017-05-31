@@ -19,9 +19,10 @@ print_r($eventsWithMeta);
 
 // create event
 $event = new FomoEventBasic();
-$event->event_type_tag = 'new-order'; // Event type tag is found on Fomo dashboard (Templates -> Template name)
+$event->event_type_tag = 'new_order'; // Event type tag is found on Fomo dashboard (Templates -> Template name)
 $event->title = 'Test event';
 $event->first_name = 'Dean';
+$event->email_address = 'dean@somewhere.com';
 $event->city = 'San Francisco';
 $event->url = 'https://www.usefomo.com';
 $event->addCustomEventField('variable_name', 'value');

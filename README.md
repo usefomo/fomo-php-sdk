@@ -38,10 +38,11 @@ To create a new event with template name:
 ```php
 use Fomo\FomoEventBasic;
 $event = new FomoEventBasic();
-$event->event_type_tag = "new-order"; // Event type tag is found on Fomo dashboard (Templates -> Template name)
+$event->event_type_tag = "new_order"; // Event type tag is found on Fomo dashboard (Templates -> Template name)
 $event->title = "Test event";
-$event->first_name = "Dean";
-$event->city = "San Francisco";
+$event->first_name = "Ryan";
+$event->email_address = "ryan.kulp@usefomo.com"; // used to fetch Gravatar for notification image
+$event->city = "New York City";
 $event->url = "https://www.usefomo.com";
 // for additional parameters check code documentation
 
@@ -58,7 +59,8 @@ use Fomo\FomoEventBasic;
 $event = new FomoEventBasic();
 $event->event_type_id = "4"; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
 $event->title = "Test event";
-$event->first_name = "Dean";
+$event->first_name = "Ryan";
+$event->email_address = "ryan.kulp@usefomo.com";
 $event->city = "San Francisco";
 $event->url = "https://www.usefomo.com";
 // for additional parameters check code documentation
