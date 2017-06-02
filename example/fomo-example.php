@@ -1,12 +1,23 @@
 <?php
+
+$loader = include 'vendor/autoload.php';
+$loader->add('Fomo\Fomo', __DIR__.'/src');
+
+// activate the autoloader
+$loader->register();
+
 use Fomo\FomoClient;
 use Fomo\FomoEventBasic;
 use Fomo\FomoEventsWithMeta;
 
-include_once '../src/Fomo/FomoClient.php';
-include_once '../src/Fomo/FomoEventBasic.php';
-include_once '../src/Fomo/FomoEventsWithMeta.php';
-$token = '<token>';
+$token = getenv( 'FOMO_TOKEN' );
+
+if ( !$token )
+{
+    echo PHP_EOL . PHP_EOL . "Please setup the env variable FOMO_TOKEN=<YOUR_FOMO_TOKEN_HERE>". PHP_EOL . PHP_EOL;
+    exit( 1 );
+}
+
 $client = new FomoClient($token);
 // $client->setProxy('tcp://127.0.0.1:8888');
 

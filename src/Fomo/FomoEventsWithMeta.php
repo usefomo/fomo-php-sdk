@@ -1,9 +1,6 @@
 <?php
 namespace Fomo;
 
-include_once 'FomoEvent.php';
-include_once 'FomoEventsMeta.php';
-
 /**
  * Class FomoEventsWithMeta
  * @package Fomo
