@@ -64,9 +64,14 @@ class FomoClient
      * Get event
      * @param $id int Event ID
      * @return FomoEvent Fomo event
+     * @throws \InvalidArgumentException
      */
     public function getEvent($id)
     {
+        if (!$id) {
+            throw new \InvalidArgumentException('Missing parameter "id" in '. __METHOD__);
+        }
+        
         return $this->cast('\Fomo\FomoEvent', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'GET'));
     }
 
@@ -138,6 +143,7 @@ class FomoClient
     {
         return $this->cast('\Fomo\FomoDeleteMessageResponse', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'DELETE'));
     }
+    
 
     /**
      * Make authorized request to Fomo API
@@ -151,6 +157,64 @@ class FomoClient
      * @throws \RuntimeException
      */
     private function makeRequest($path, $method, $data = null, $headers = array())
+    {
+        $curl = curl_init($this->endpoint . $path);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        // curl_setopt($curl, CURLOPT_VERBOSE, TRUE);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                                                    'Content-Type: application/json',
+                                                    'User-Agent: Fomo/PHP/' . $this->sdkVersion,
+                                                    'Authorization: Token ' . $this->authToken
+                                                ));
+                                                
+        if ($data || in_array($method, array( "POST", "PATCH" ))) {
+            // convert from obj to array
+            $json  = json_encode($data);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+        }
+        
+        // Make the REST call, returning the result
+        $response = curl_exec($curl);
+        
+        if (curl_errno($curl)) {
+            echo PHP_EOL . PHP_EOL . "Fomo API CURL error: " . curl_error($curl) . PHP_EOL;
+            exit(1);
+        }
+        
+        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        $header = substr($response, 0, $header_size);
+        $httpResponse = substr($response, $header_size);
+
+        if (!$httpResponse) {
+            $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            echo PHP_EOL . PHP_EOL . "Fomo API CURL ERROR: HTTP response code ". $httpcode . PHP_EOL;
+            echo "No HTTP response message received from the API: {$method} {$this->endpoint}{$path}". PHP_EOL;
+            exit(1);
+        }
+
+        $response = json_decode($httpResponse);
+        // var_dump($http_response_header);
+        // var_dump($response);
+        return $response;
+    }
+
+    /**
+     * Make authorized request to Fomo API
+     *
+     * @param $path string API path
+     * @param $method string HTTP Method
+     * @param mixed $data Object to send, object is JSON serialized before it is sent
+     * @param array $headers List of headers to be added to request
+     *
+     * @return mixed Data received from API response
+     * @throws \RuntimeException
+     */
+    private function makeRequest2($path, $method, $data = null, $headers = array())
     {
         if ($headers == null) {
             $headers = array();
