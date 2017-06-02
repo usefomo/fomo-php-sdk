@@ -1,8 +1,6 @@
 <?php
 namespace Fomo;
 
-include_once 'FomoEventBasic.php';
-
 /**
  * Class FomoEvent
  * @package Fomo

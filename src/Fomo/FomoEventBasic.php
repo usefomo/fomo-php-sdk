@@ -1,8 +1,6 @@
 <?php
 namespace Fomo;
 
-include_once 'FomoEventCustomAttribute.php';
-
 /**
  * Class FomoEventBasic
  * @package Fomo

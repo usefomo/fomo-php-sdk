@@ -5,9 +5,6 @@
 
 namespace Fomo;
 
-include_once 'FomoEvent.php';
-include_once 'FomoDeleteMessageResponse.php';
-
 /**
  * Fomo Client is wrapper around official Fomo API
  *
