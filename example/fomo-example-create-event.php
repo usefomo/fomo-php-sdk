@@ -15,7 +15,8 @@ $event->event_type_tag = 'user_signup'; // Event type tag is found on Fomo dashb
 $event->title = 'Test event';
 $event->first_name = 'Dean';
 $event->email_address = 'dean@somewhere.com';
-$event->city = 'San Francisco';
+$event->ip_address = '128.177.108.102';
+$event->city = 'Atlanta';
 $event->url = 'https://www.usefomo.com';
 $event->addCustomEventField('variable_name', 'value');
 $fomoEvent = $client->createEvent($event);

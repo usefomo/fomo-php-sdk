@@ -9,7 +9,7 @@ namespace Fomo;
  * Fomo Client is wrapper around official Fomo API
  *
  * @link http://docs.usefomo.com/reference
- * @version 1.0.3
+ * @version 1.0.8
  * @author Fomo <https://www.usefomo.com>
  * @package Fomo
  *
@@ -25,7 +25,7 @@ class FomoClient
     /**
      * @var string SDK version
      */
-    private $sdkVersion = '1.0.3';
+    private $sdkVersion = '1.0.8';
 
     /**
      * @var string Fomo Auth token
@@ -71,7 +71,7 @@ class FomoClient
         if (!$id) {
             throw new \InvalidArgumentException('Missing parameter "id" in '. __METHOD__);
         }
-        
+
         return $this->cast('\Fomo\FomoEvent', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'GET'));
     }
 
@@ -143,7 +143,7 @@ class FomoClient
     {
         return $this->cast('\Fomo\FomoDeleteMessageResponse', $this->makeRequest('/api/v1/applications/me/events/' . $id, 'DELETE'));
     }
-    
+
 
     /**
      * Make authorized request to Fomo API
@@ -171,21 +171,21 @@ class FomoClient
                                                     'User-Agent: Fomo/PHP/' . $this->sdkVersion,
                                                     'Authorization: Token ' . $this->authToken
                                                 ));
-                                                
+
         if ($data || in_array($method, array( "POST", "PATCH" ))) {
             // convert from obj to array
             $json  = json_encode($data);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
         }
-        
+
         // Make the REST call, returning the result
         $response = curl_exec($curl);
-        
+
         if (curl_errno($curl)) {
             echo PHP_EOL . PHP_EOL . "Fomo API CURL error: " . curl_error($curl) . PHP_EOL;
             exit(1);
         }
-        
+
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $header = substr($response, 0, $header_size);
         $httpResponse = substr($response, $header_size);
