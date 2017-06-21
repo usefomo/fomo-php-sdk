@@ -5,6 +5,8 @@
 
 namespace Fomo;
 
+use Fomo\Exception\ApiException;
+
 /**
  * Fomo Client is wrapper around official Fomo API
  *
@@ -182,19 +184,23 @@ class FomoClient
         $response = curl_exec($curl);
 
         if (curl_errno($curl)) {
-            echo PHP_EOL . PHP_EOL . "Fomo API CURL error: " . curl_error($curl) . PHP_EOL;
-            exit(1);
+            throw new ApiException(sprintf('Fomo API curl error: %s (%d)', curl_error($curl), curl_errno($curl)));
         }
 
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $header = substr($response, 0, $header_size);
         $httpResponse = substr($response, $header_size);
 
-        if (!$httpResponse) {
-            $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-            echo PHP_EOL . PHP_EOL . "Fomo API CURL ERROR: HTTP response code ". $httpcode . PHP_EOL;
-            echo "No HTTP response message received from the API: {$method} {$this->endpoint}{$path}". PHP_EOL;
-            exit(1);
+        if ($httpResponse === '') {
+            throw new ApiException(
+                sprintf(
+                    'Fomo API curl error: No HTTP response message received from the API (%s %s%s), HTTP status code %s',
+                    $method,
+                    $this->endpoint,
+                    $path,
+                    curl_getinfo($curl, CURLINFO_HTTP_CODE)
+                )
+            );
         }
 
         $response = json_decode($httpResponse);
