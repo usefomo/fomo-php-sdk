@@ -1,7 +1,6 @@
 {
   "name": "usefomo/fomo-php-sdk",
   "description": "Fomo PHP SDK is the official SDK wrapper for the Fomo API service",
-  "version": "1.0.8",
   "keywords": [
     "fomo",
     "notifications",
