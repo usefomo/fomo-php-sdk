@@ -33,15 +33,6 @@
   "autoload": {
     "psr-4": {
       "Fomo\\": "src/Fomo"
-    },
-    "classmap": [
-      "src/Fomo/FomoClient.php",
-      "src/Fomo/FomoDeleteMessageResponse.php",
-      "src/Fomo/FomoEvent.php",
-      "src/Fomo/FomoEventBasic.php",
-      "src/Fomo/FomoEventCustomAttribute.php",
-      "src/Fomo/FomoEventsMeta.php",
-      "src/Fomo/FomoEventsWithMeta.php"
-    ]
+    }
   }
 }
