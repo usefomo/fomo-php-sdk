@@ -187,23 +187,37 @@ class FomoClient
             throw new ApiException(sprintf('Fomo API curl error: %s (%d)', curl_error($curl), curl_errno($curl)));
         }
 
+        $responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $header = substr($response, 0, $header_size);
         $httpResponse = substr($response, $header_size);
 
-        if ($httpResponse === '') {
+        if ($httpResponse === '' || $responseCode !== 200) {
             throw new ApiException(
                 sprintf(
-                    'Fomo API curl error: No HTTP response message received from the API (%s %s%s), HTTP status code %s',
+                    'Fomo API curl error: Invalid response message received from the API (%s %s%s), HTTP status code %s',
                     $method,
                     $this->endpoint,
                     $path,
-                    curl_getinfo($curl, CURLINFO_HTTP_CODE)
+                    $responseCode
                 )
             );
         }
 
-        $response = json_decode($httpResponse);
+        $response = @json_decode($httpResponse);
+
+        if ($response === null && json_last_error() !== JSON_ERROR_NONE) {
+            throw new ApiException(
+                sprintf(
+                    'Fomo API curl error: JSON decoding of remote response failed.\n' .
+                    'Error code: %d\n' .
+                    'HTTP status code: %s\n',
+                    json_last_error(),
+                    $httpResponse
+                )
+            );
+        }
+
         // var_dump($http_response_header);
         // var_dump($response);
         return $response;
