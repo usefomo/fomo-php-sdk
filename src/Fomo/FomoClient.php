@@ -10,9 +10,9 @@ use Fomo\Exception\ApiException;
 /**
  * Fomo Client is wrapper around official Fomo API
  *
- * @link http://docs.usefomo.com/reference
- * @version 1.0.8
- * @author Fomo <https://www.usefomo.com>
+ * @link http://docs.fomo.com/reference
+ * @version 1.1.0
+ * @author Fomo <https://fomo.com>
  * @package Fomo
  *
  * Requires PHP version >= 5.3.0
@@ -27,7 +27,7 @@ class FomoClient
     /**
      * @var string SDK version
      */
-    private $sdkVersion = '1.0.8';
+    private $sdkVersion = '1.1.0';
 
     /**
      * @var string Fomo Auth token
