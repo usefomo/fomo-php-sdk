@@ -9,18 +9,18 @@
     "social proof"
   ],
   "type": "library",
-  "homepage": "https://www.usefomo.com",
+  "homepage": "https://fomo.com",
   "license": "proprietary",
   "authors": [
     {
       "name": "fomo",
-      "email": "hello@usefomo.com",
-      "homepage": "https://www.usefomo.com",
+      "email": "hello@fomo.com",
+      "homepage": "https://fomo.com",
       "role": "developer"
     }
   ],
   "support": {
-    "email": "hello@usefomo.com",
+    "email": "hello@fomo.com",
     "source": "https://github.com/usefomo/fomo-php-sdk",
     "docs": "https://github.com/usefomo/fomo-php-sdk/blob/master/README.md",
     "issues": "https://github.com/usefomo/fomo-php-sdk/issues"
