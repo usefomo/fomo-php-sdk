@@ -11,7 +11,7 @@ use Fomo\Exception\ApiException;
  * Fomo Client is wrapper around official Fomo API
  *
  * @link http://docs.fomo.com/reference
- * @version 1.1.0
+ * @version 1.1.1
  * @author Fomo <https://fomo.com>
  * @package Fomo
  *
@@ -27,7 +27,7 @@ class FomoClient
     /**
      * @var string SDK version
      */
-    private $sdkVersion = '1.1.0';
+    private $sdkVersion = '1.1.1';
 
     /**
      * @var string Fomo Auth token
