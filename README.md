@@ -43,10 +43,10 @@ $event = new FomoEventBasic();
 $event->event_type_tag = "new_order"; // Event type tag is found on Fomo dashboard (Templates -> Template name)
 $event->title = "Test event";
 $event->first_name = "Ryan";
-$event->email_address = "ryan.kulp@usefomo.com"; // used to fetch Gravatar for notification image
+$event->email_address = "ryan.kulp@fomo.com"; // used to fetch Gravatar for notification image
 $event->ip_address = "128.177.108.102"; // used for extracting location parameters (city, province, country)
 $event->city = "New York City";
-$event->url = "https://www.usefomo.com";
+$event->url = "https://www.fomo.com";
 // for additional parameters check code documentation
 
 // Add event custom attributes
@@ -63,9 +63,9 @@ $event = new FomoEventBasic();
 $event->event_type_id = "4"; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
 $event->title = "Test event";
 $event->first_name = "Ryan";
-$event->email_address = "ryan.kulp@usefomo.com";
+$event->email_address = "ryan.kulp@fomo.com";
 $event->ip_address = "128.177.108.102";
-$event->url = "https://www.usefomo.com";
+$event->url = "https://www.fomo.com";
 // for additional parameters check code documentation
 
 // Add event custom attributes

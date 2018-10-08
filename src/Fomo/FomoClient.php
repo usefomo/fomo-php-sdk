@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016. Fomo. https://www.usefomo.com
+ * Copyright (c) 2018. Fomo. https://fomo.com
  **/
 
 namespace Fomo;
@@ -42,7 +42,7 @@ class FomoClient
     /**
      * @var string Fomo server endpoint
      */
-    private $endpoint = 'https://www.usefomo.com';
+    private $endpoint = 'https://api.fomo.com';
 
     /**
      * FomoClient constructor to setup auth token

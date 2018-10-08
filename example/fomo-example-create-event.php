@@ -17,7 +17,7 @@ $event->first_name = 'Dean';
 $event->email_address = 'dean@somewhere.com';
 $event->ip_address = '128.177.108.102';
 $event->city = 'Atlanta';
-$event->url = 'https://www.usefomo.com';
+$event->url = 'https://fomo.com';
 $event->addCustomEventField('variable_name', 'value');
 $fomoEvent = $client->createEvent($event);
 
