@@ -96,6 +96,22 @@ class FomoClient
     }
 
     /**
+     * Search events
+     * @param int $size
+     * @param int $page
+     * @return FomoEvent|null Fomo event
+     */
+    public function searchEvent($field, $value)
+    {
+        $object = $this->makeRequest('/api/v1/applications/me/events/find?field=' . $field . '&q=' . $value, 'GET');
+        $list = array();
+        if ($object != null) {
+            return $this->cast('\Fomo\FomoEvent', $object);
+        }
+        return null;
+    }
+
+    /**
      * Get events with meta data
      * @param int $size Page size, default = 30
      * @param int $page Page number, default = 1
