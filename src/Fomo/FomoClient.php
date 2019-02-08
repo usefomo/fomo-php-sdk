@@ -97,14 +97,13 @@ class FomoClient
 
     /**
      * Search events
-     * @param int $size
-     * @param int $page
+     * @param string $field
+     * @param string $value
      * @return FomoEvent|null Fomo event
      */
     public function searchEvent($field, $value)
     {
         $object = $this->makeRequest('/api/v1/applications/me/events/find?field=' . $field . '&q=' . $value, 'GET');
-        $list = array();
         if ($object != null) {
             return $this->cast('\Fomo\FomoEvent', $object);
         }
