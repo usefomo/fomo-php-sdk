@@ -63,6 +63,11 @@ class FomoEventBasic
     public $image_url = '';
 
     /**
+     * @var string External id of the event
+     */
+    public $external_id = null;
+
+    /**
      * @var FomoEventCustomAttribute[] Array to create custom event fields
      */
     public $custom_event_fields_attributes = array();
